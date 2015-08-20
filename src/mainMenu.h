@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <string>
+#include <stdlib.h>
 #include "newGame.h"
 #include "loadGame.h"
 using std::cout;
@@ -47,19 +48,29 @@ public:
     
     static MenuOption* readOption() {
         MenuOption* chosenOption = NULL;
+        int entryFailures = 0;
         
         cout << "\n\nType Your Choosen Option From Menu: " << endl;
-        string input = string("");
-        getline(cin, input);
-        input = toUpperCase(input);
         
-        for (int i = 0; i < MENU_OPTIONS.size(); i++) {
-            MenuOption* option = MENU_OPTIONS[i];
-            string optionName = option->name();
+        while (chosenOption == NULL) {
+            string input = string("");
+            getline(cin, input);
+            input = toUpperCase(input);
             
-            if (toUpperCase(optionName).compare(input) == 0) {
-                chosenOption = option;
+            for (int i = 0; i < MENU_OPTIONS.size(); i++) {
+                MenuOption* option = MENU_OPTIONS[i];
+                string optionName = option->name();
+                
+                if (toUpperCase(optionName).compare(input) == 0) {
+                    chosenOption = option;
+                }
             }
+            
+            if (chosenOption == NULL) {
+                printRepeatInputMessage(entryFailures);
+                entryFailures++;
+            }
+            
         }
         
         return chosenOption;
@@ -78,7 +89,37 @@ private:
         std::transform(theString.begin(), theString.end(), stringCopy.begin(), ::toupper);
         return stringCopy;
     }
+    
+    static void printRepeatInputMessage(int entryFailures) {
+        switch (entryFailures) {
+            case 0:
+                cout << "Invalid option try again:" << endl;
+                break;
+            case 1:
+                cout << "Still Invalid try copy and paste? " << endl;
+                break;
+            case 2:
+                cout << "This really isn't rocket science! Enter an option from the list above:" << endl;
+                break;
+            case 3:
+                cout << "Last chance stop being stoopid:" << endl;
+                break;
+            case 4:
+                cout
+                << "Congratulations you lose the game before even beginning" << endl
+                << repeatedSymbol(MENU_WIDTH, "=") << endl
+                << centerLine(MENU_WIDTH, "", "||") << endl
+                << centerLine(MENU_WIDTH, " GAME OVER", "||") << endl
+                << centerLine(MENU_WIDTH, "", "||") << endl
+                << repeatedSymbol(MENU_WIDTH, "=") << endl << endl;
+                
+                exit(EXIT_FAILURE);
+            default:
+                break;
+        }
+    }
 };
+
 
 const int MainMenu::MENU_WIDTH = 50;
 const vector<MenuOption*> MainMenu::MENU_OPTIONS {&(NewGame::instance()), &(LoadGame::instance())};
