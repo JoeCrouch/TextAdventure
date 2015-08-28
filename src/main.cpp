@@ -2,6 +2,8 @@
 #include <iostream>
 #include "mainMenu.h"
 #include "menuOption.h"
+using std::cout;
+using std::endl;
 
 int main()
 {
