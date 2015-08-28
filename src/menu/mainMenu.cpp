@@ -3,6 +3,11 @@
 #include "mainMenu.h"
 using std::cout;
 
+MainMenu& MainMenu::instance() {
+    static MainMenu instance;
+    return instance;
+}
+
 void MainMenu::printTitle() {
     cout
     << repeatedSymbol(MENU_WIDTH, "_") << endl
@@ -64,6 +69,33 @@ string MainMenu::toUpperCase(string theString) {
     return stringCopy;
 }
 
+string MainMenu::repeatedSymbol(int length, string symbol) {
+    string repeatedSymbolString = string("");
+    
+    for (int i = 0; i < length; i ++) {
+        repeatedSymbolString += symbol;
+    }
+    
+    return repeatedSymbolString;
+}
+
+string MainMenu::centerLine(int length, string centerText, string border) {
+    int centerTextLength = (int) centerText.size();
+    int borderLength = (int) border.size();
+    
+    int totalWhiteSpaceLength = length - centerTextLength - (2 * borderLength);
+    int firstWhiteSpaceLength = totalWhiteSpaceLength / 2;
+    int secondWhiteSpaceLength = firstWhiteSpaceLength + totalWhiteSpaceLength % 2;
+    string centerLine =
+    border +
+    repeatedSymbol(firstWhiteSpaceLength, " ") +
+    centerText +
+    repeatedSymbol(secondWhiteSpaceLength, " ") +
+    border;
+    
+    return centerLine;
+}
+
 void MainMenu::printRepeatInputMessage(int entryFailures) {
     switch (entryFailures) {
         case 0:
@@ -95,30 +127,3 @@ void MainMenu::printRepeatInputMessage(int entryFailures) {
 
 const int MainMenu::MENU_WIDTH = 50;
 const vector<MenuOption*> MainMenu::MENU_OPTIONS {&(NewGame::instance()), &(LoadGame::instance())};
-
-string repeatedSymbol(int length, string symbol) {
-    string repeatedSymbolString = string("");
-    
-    for (int i = 0; i < length; i ++) {
-        repeatedSymbolString += symbol;
-    }
-    
-    return repeatedSymbolString;
-}
-
-string centerLine(int length, string centerText, string border) {
-    int centerTextLength = (int) centerText.size();
-    int borderLength = (int) border.size();
-    
-    int totalWhiteSpaceLength = length - centerTextLength - (2 * borderLength);
-    int firstWhiteSpaceLength = totalWhiteSpaceLength / 2;
-    int secondWhiteSpaceLength = firstWhiteSpaceLength + totalWhiteSpaceLength % 2;
-    string centerLine =
-    border +
-    repeatedSymbol(firstWhiteSpaceLength, " ") +
-    centerText +
-    repeatedSymbol(secondWhiteSpaceLength, " ") +
-    border;
-    
-    return centerLine;
-}

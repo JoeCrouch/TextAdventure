@@ -7,10 +7,11 @@ using std::endl;
 
 int main()
 {
-    MainMenu::printTitle();
-    MainMenu::printMenuOptions();
+    MainMenu* menu = &(MainMenu::instance());
+    menu->printTitle();
+    menu->printMenuOptions();
     
-    MenuOption* option = MainMenu::readOption();
+    MenuOption* option = menu->readOption();
     
     cout << "Option chosen is: " << option->name() << endl;
     return 0;

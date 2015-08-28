@@ -22,9 +22,10 @@ string centerLine(int length, string centerText, string border);
 class MainMenu {
 public:
     
-    static void printTitle();
-    static void printMenuOptions();
-    static MenuOption* readOption();
+    static MainMenu& instance();
+    void printTitle();
+    void printMenuOptions();
+    MenuOption* readOption();
     
 private:
     MainMenu() {};
@@ -34,8 +35,10 @@ private:
     static const int MENU_WIDTH;
     static const vector<MenuOption*> MENU_OPTIONS;
     
-    static string toUpperCase(string theString);
-    static void printRepeatInputMessage(int entryFailures);
+    string toUpperCase(string theString);
+    string repeatedSymbol(int length, string symbol);
+    string centerLine(int length, string centerText, string border);
+    void printRepeatInputMessage(int entryFailures);
 };
 
 #endif
