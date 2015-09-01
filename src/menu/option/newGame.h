@@ -12,7 +12,8 @@ class NewGame: public MenuOption {
 public:
     
     static NewGame& instance();
-    virtual string name();
+    string name();
+    void apply();
     
 private:
     

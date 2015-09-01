@@ -13,7 +13,7 @@ int main()
     
     MenuOption* option = menu->readOption();
     
-    cout << "Option chosen is: " << option->name() << endl;
+    option->apply();
     return 0;
 }
 

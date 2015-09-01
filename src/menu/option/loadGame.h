@@ -11,7 +11,8 @@ class LoadGame: public MenuOption {
 public:
     
     static LoadGame& instance();
-    virtual string name();
+    string name();
+    void apply();
     
 private:
     
