@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include "game.h"
 #include "mainMenu.h"
 #include "menuOption.h"
 using std::cout;
@@ -13,7 +14,8 @@ int main()
     
     MenuOption* option = menu->readOption();
     
-    option->apply();
+    Game* game = option->buildGame();
+    game->play();
     return 0;
 }
 

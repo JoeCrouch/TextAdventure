@@ -12,7 +12,7 @@ public:
     
     static LoadGame& instance();
     string name();
-    void apply();
+    Game* buildGame();
     
 private:
     

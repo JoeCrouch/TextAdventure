@@ -13,7 +13,7 @@ public:
     
     static NewGame& instance();
     string name();
-    void apply();
+    Game* buildGame();
     
 private:
     

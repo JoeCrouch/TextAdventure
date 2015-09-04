@@ -1,7 +1,11 @@
 
 #include <iostream>
+#include <stdlib.h>
 #include "mainMenu.h"
 using std::cout;
+using std::endl;
+using std::cin;
+using std::getline;
 
 MainMenu& MainMenu::instance() {
     static MainMenu instance;
