@@ -3,15 +3,22 @@
 #define TextAdventureXCode_player_h
 
 #include <string>
+#include "location.h"
 using std::string;
 
 class Player {
 public:
+    Player(string name, Location location);
+    
     void printPlayerCharacteristics();
-    Player(std::string name);
+    string getName();
+    string getLocationName();
+    
 private:
     Player();
-    std::string name;
+    
+    string name;
+    Location location;
 };
 
 #endif

@@ -22,7 +22,7 @@ Game* NewGame::buildGame() {
     string characterName;
     getline(cin, characterName);
     
-    Player player = Player(characterName);
+    Player player = Player(characterName, Location::HOME);
     
     return new Game(player);
 }
