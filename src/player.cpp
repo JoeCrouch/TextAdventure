@@ -4,17 +4,25 @@
 using std::cout;
 using std::endl;
 
-Player::Player(string name, Location location) : name(name), location(location) {
+Player::Player(string name, Location location) : name_(name), location_(location) {
 }
 
 void Player::printPlayerCharacteristics() {
-    cout << endl << "Name: " + name << endl;
+    cout << endl << "Name: " + name_ << endl;
 }
 
 string Player::getName() {
-    return name;
+    return name_;
+}
+
+Location Player::getLocation() {
+    return location_;
+}
+
+void Player::moveTo(Location location) {
+    location_ = location;
 }
 
 string Player::getLocationName() {
-    return location.getName();
+    return location_.getName();
 }

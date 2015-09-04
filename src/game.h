@@ -3,6 +3,10 @@
 #define TextAdventureXCode_game_h
 
 #include "player.h"
+#include "location.h"
+#include "direction.h"
+#include <vector>
+using std::vector;
 
 class Game {
     Player player;
@@ -13,6 +17,10 @@ public:
     
 private:
     Game();
+    
+    static const vector<Location> LOCATIONS;
+    
+    void movePlayer(Direction dir);
 };
 
 #endif

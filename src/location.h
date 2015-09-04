@@ -9,18 +9,23 @@ class Location {
     
 public:
     static const Location HOME;
+    static const Location WOODS;
+    static const Location SEA;
+    static const Location MOUNTAIN;
+    static const Location DESERT;
     
     string getName();
+    int getXPosition();
+    int getYPosition();
     
 private:
     Location() {};
-    void operator=(Location const&) = delete;
     
     Location(int x, int y, string name);
     
-    int xPosition;
-    int yPosition;
-    string name;
+    int xPosition_;
+    int yPosition_;
+    string name_;
 };
 
 #endif

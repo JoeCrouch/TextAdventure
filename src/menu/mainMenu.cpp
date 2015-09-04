@@ -54,6 +54,7 @@ MenuOption* MainMenu::readOption() {
             
             if (toUpperCase(optionName).compare(input) == 0) {
                 chosenOption = option;
+                break;
             }
         }
         
@@ -131,3 +132,4 @@ void MainMenu::printRepeatInputMessage(int entryFailures) {
 
 const int MainMenu::MENU_WIDTH = 50;
 const vector<MenuOption*> MainMenu::MENU_OPTIONS {&(NewGame::instance()), &(LoadGame::instance())};
+

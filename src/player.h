@@ -12,13 +12,15 @@ public:
     
     void printPlayerCharacteristics();
     string getName();
+    Location getLocation();
+    void moveTo(Location location);
     string getLocationName();
     
 private:
     Player();
     
-    string name;
-    Location location;
+    string name_;
+    Location location_;
 };
 
 #endif
