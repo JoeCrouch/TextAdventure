@@ -2,6 +2,9 @@
 #ifndef TextAdventureXCode_direction_h
 #define TextAdventureXCode_direction_h
 
+#include <string>
+using std::string;
+
 class Direction {
     
 public:
@@ -9,6 +12,8 @@ public:
     static const Direction SOUTH;
     static const Direction EAST;
     static const Direction WEST;
+    
+    static const Direction* getDirection(string direction);
     
     int getXDirection();
     int getYDirection();

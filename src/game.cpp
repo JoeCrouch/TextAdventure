@@ -1,9 +1,14 @@
 
 #include <iostream>
+#include <string>
+#include <stdlib.h>
 #include "game.h"
 #include "direction.h"
 using std::cout;
+using std::cin;
 using std::endl;
+using std::string;
+using std::getline;
 
 Game::Game(Player player) : player(player) {
 }
@@ -11,35 +16,21 @@ Game::Game(Player player) : player(player) {
 void Game::play() {
     cout << player.getName() + " wakes up at " + player.getLocationName() << endl;
     
-    movePlayer(Direction::NORTH);
-    cout << player.getName() + " moves North to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::NORTH);
-    cout << player.getName() + " moves North to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::SOUTH);
-    cout << player.getName() + " moves South to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::SOUTH);
-    cout << player.getName() + " moves South to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::EAST);
-    cout << player.getName() + " moves East to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::NORTH);
-    cout << player.getName() + " moves North to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::EAST);
-    cout << player.getName() + " moves East to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::WEST);
-    cout << player.getName() + " moves West to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::WEST);
-    cout << player.getName() + " moves West to " + player.getLocationName() << endl;
-    
-    movePlayer(Direction::EAST);
-    cout << player.getName() + " moves east to " + player.getLocationName() << endl;
+    bool exitedGame = false;
+    while (!exitedGame) {
+        cout << "Which direction would you like to move (invalid direction will exit game) ?" << endl;
+        string input = string("");
+        getline(cin, input);
+        
+        const Direction* direction = Direction::getDirection(input);
+        
+        if (direction == NULL) {
+            exitedGame = true;
+        } else {
+            movePlayer(*direction);
+            cout << player.getName() + " moves " + input + " to " + player.getLocationName() << endl;
+        }
+    }
     
 }
 
