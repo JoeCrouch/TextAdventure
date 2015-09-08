@@ -1,22 +1,24 @@
 
 #include "direction.h"
+#include "stringManager.h"
 
-const Direction Direction::NORTH = Direction(1, 0);
-const Direction Direction::SOUTH = Direction(-1, 0);
-const Direction Direction::EAST = Direction(0, 1);
-const Direction Direction::WEST = Direction(0, -1);
+const Direction Direction::NORTH = Direction(1, 0, "north");
+const Direction Direction::SOUTH = Direction(-1, 0, "south");
+const Direction Direction::EAST = Direction(0, 1, "east");
+const Direction Direction::WEST = Direction(0, -1, "west");
 
-Direction::Direction(int x, int y) : xDirection_(x), yDirection_(y) {
+Direction::Direction(int x, int y, string name) : xDirection_(x), yDirection_(y), name_(name) {
 }
 
 const Direction* Direction::getDirection(string direction) {
-    if (direction.compare("north") == 0) {
+    
+    if (StringManager::equalIgnoreCase(direction, NORTH.name_)) {
         return &(NORTH);
-    } else if (direction.compare("south") == 0) {
+    } else if (StringManager::equalIgnoreCase(direction, SOUTH.name_)) {
         return &(SOUTH);
-    } else if (direction.compare("east") == 0) {
+    } else if (StringManager::equalIgnoreCase(direction, EAST.name_)) {
         return &(EAST);
-    } else if (direction.compare("west") == 0) {
+    } else if (StringManager::equalIgnoreCase(direction, WEST.name_)) {
         return &(WEST);
     }
     
@@ -29,4 +31,8 @@ int Direction::getXDirection() {
 
 int Direction::getYDirection() {
     return yDirection_;
+}
+
+string Direction::getName() const {
+    return name_;
 }

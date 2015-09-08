@@ -1,6 +1,6 @@
 
-#ifndef TextAdventureXCode_direction_h
-#define TextAdventureXCode_direction_h
+#ifndef TextAdventure_direction_h
+#define TextAdventure_direction_h
 
 #include <string>
 using std::string;
@@ -17,15 +17,17 @@ public:
     
     int getXDirection();
     int getYDirection();
+    string getName() const;
     
 private:
     Direction() {};
     void operator=(Direction const&) = delete;
     
-    Direction(int x, int y);
+    Direction(int x, int y, string name);
     
     int xDirection_;
     int yDirection_;
+    string name_;
 };
 
 #endif

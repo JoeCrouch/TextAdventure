@@ -1,6 +1,6 @@
 
-#ifndef TextAdventureXCode_location_h
-#define TextAdventureXCode_location_h
+#ifndef TextAdventure_location_h
+#define TextAdventure_location_h
 
 #include <string>
 using std::string;

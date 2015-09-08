@@ -28,7 +28,7 @@ void Game::play() {
             exitedGame = true;
         } else {
             movePlayer(*direction);
-            cout << player.getName() + " moves " + input + " to " + player.getLocationName() << endl;
+            cout << player.getName() + " moves " + direction->getName() + " to " + player.getLocationName() << endl;
         }
     }
     

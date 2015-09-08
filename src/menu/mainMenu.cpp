@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "mainMenu.h"
+#include "stringManager.h"
 using std::cout;
 using std::endl;
 using std::cin;
@@ -14,15 +15,15 @@ MainMenu& MainMenu::instance() {
 
 void MainMenu::printTitle() {
     cout
-    << repeatedSymbol(MENU_WIDTH, "_") << endl
+    << StringManager::repeatedSymbol(MENU_WIDTH, "_") << endl
     << centerLine(MENU_WIDTH, "Text Adventure", "|") << endl
-    << repeatedSymbol(MENU_WIDTH, "_") << endl << endl;
+    << StringManager::repeatedSymbol(MENU_WIDTH, "_") << endl << endl;
 }
 
 void MainMenu::printMenuOptions() {
     
     cout
-    << repeatedSymbol(MENU_WIDTH, "=") << endl
+    << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl
     << centerLine(MENU_WIDTH, "", "||") << endl;
     
     for (int i = 0; i < MENU_OPTIONS.size(); i++) {
@@ -34,7 +35,7 @@ void MainMenu::printMenuOptions() {
     
     cout
     << centerLine(MENU_WIDTH, "", "||") << endl
-    << repeatedSymbol(MENU_WIDTH, "=") << endl;
+    << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl;
 }
 
 MenuOption* MainMenu::readOption() {
@@ -46,13 +47,11 @@ MenuOption* MainMenu::readOption() {
     while (chosenOption == NULL) {
         string input = string("");
         getline(cin, input);
-        input = toUpperCase(input);
         
         for (int i = 0; i < MENU_OPTIONS.size(); i++) {
             MenuOption* option = MENU_OPTIONS[i];
-            string optionName = option->name();
             
-            if (toUpperCase(optionName).compare(input) == 0) {
+            if (StringManager::equalIgnoreCase(option->name(), input)) {
                 chosenOption = option;
                 break;
             }
@@ -68,22 +67,6 @@ MenuOption* MainMenu::readOption() {
     return chosenOption;
 }
 
-string MainMenu::toUpperCase(string theString) {
-    string stringCopy = theString;
-    std::transform(theString.begin(), theString.end(), stringCopy.begin(), ::toupper);
-    return stringCopy;
-}
-
-string MainMenu::repeatedSymbol(int length, string symbol) {
-    string repeatedSymbolString = string("");
-    
-    for (int i = 0; i < length; i ++) {
-        repeatedSymbolString += symbol;
-    }
-    
-    return repeatedSymbolString;
-}
-
 string MainMenu::centerLine(int length, string centerText, string border) {
     int centerTextLength = (int) centerText.size();
     int borderLength = (int) border.size();
@@ -93,9 +76,9 @@ string MainMenu::centerLine(int length, string centerText, string border) {
     int secondWhiteSpaceLength = firstWhiteSpaceLength + totalWhiteSpaceLength % 2;
     string centerLine =
     border +
-    repeatedSymbol(firstWhiteSpaceLength, " ") +
+    StringManager::repeatedSymbol(firstWhiteSpaceLength, " ") +
     centerText +
-    repeatedSymbol(secondWhiteSpaceLength, " ") +
+    StringManager::repeatedSymbol(secondWhiteSpaceLength, " ") +
     border;
     
     return centerLine;
@@ -118,11 +101,11 @@ void MainMenu::printRepeatInputMessage(int entryFailures) {
         case 4:
             cout
             << "Congratulations you lose the game before even beginning" << endl
-            << repeatedSymbol(MENU_WIDTH, "=") << endl
+            << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl
             << centerLine(MENU_WIDTH, "", "||") << endl
             << centerLine(MENU_WIDTH, " GAME OVER", "||") << endl
             << centerLine(MENU_WIDTH, "", "||") << endl
-            << repeatedSymbol(MENU_WIDTH, "=") << endl << endl;
+            << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl << endl;
             
             exit(EXIT_FAILURE);
         default:

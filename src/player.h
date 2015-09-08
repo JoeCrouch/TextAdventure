@@ -1,6 +1,6 @@
 
-#ifndef TextAdventureXCode_player_h
-#define TextAdventureXCode_player_h
+#ifndef TextAdventure_player_h
+#define TextAdventure_player_h
 
 #include <string>
 #include "location.h"

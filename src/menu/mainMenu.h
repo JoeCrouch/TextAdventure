@@ -10,9 +10,6 @@
 using std::vector;
 using std::string;
 
-string repeatedSymbol(int length, string symbol);
-string centerLine(int length, string centerText, string border);
-
 class MainMenu {
 public:
     
@@ -29,8 +26,6 @@ private:
     static const int MENU_WIDTH;
     static const vector<MenuOption*> MENU_OPTIONS;
     
-    string toUpperCase(string theString);
-    string repeatedSymbol(int length, string symbol);
     string centerLine(int length, string centerText, string border);
     void printRepeatInputMessage(int entryFailures);
 };
