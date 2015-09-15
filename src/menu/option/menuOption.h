@@ -9,6 +9,8 @@ using std::string;
 
 class MenuOption {
 public:
+    virtual ~MenuOption() {};
+    
     virtual string name() = 0;
     virtual Game* buildGame() = 0;
 };

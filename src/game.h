@@ -2,9 +2,11 @@
 #ifndef TextAdventure_game_h
 #define TextAdventure_game_h
 
+class Location;
+class Direction;
+
 #include "player.h"
-#include "location.h"
-#include "direction.h"
+
 #include <vector>
 using std::vector;
 
@@ -19,7 +21,6 @@ private:
     Game();
     
     static const vector<Location> LOCATIONS;
-    
     void movePlayer(Direction dir);
 };
 

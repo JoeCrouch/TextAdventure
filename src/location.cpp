@@ -21,3 +21,11 @@ int Location::getXPosition() {
 int Location::getYPosition() {
     return yPosition_;
 }
+
+bool Location::operator==(const Location& location) {
+    return xPosition_ == location.xPosition_ && yPosition_ == location.yPosition_;
+}
+
+bool Location::isAt(int x, int y) {
+    return xPosition_ == x && yPosition_ == y;
+}

@@ -28,7 +28,6 @@ void Game::play() {
             exitedGame = true;
         } else {
             movePlayer(*direction);
-            cout << player.getName() + " moves " + direction->getName() + " to " + player.getLocationName() << endl;
         }
     }
     
@@ -45,25 +44,23 @@ const vector<Location> Game::LOCATIONS {
 void Game::movePlayer(Direction dir) {
     Location currentLocation = player.getLocation();
     
-    int currentXPosition = currentLocation.getXPosition();
-    int currentYPosition = currentLocation.getYPosition();
-    
-    int newXPosition = currentXPosition + dir.getXDirection();
-    int newYPosition = currentYPosition+ dir.getYDirection();
+    int newXPosition = currentLocation.getXPosition() + dir.getXDirection();
+    int newYPosition = currentLocation.getYPosition() + dir.getYDirection();
     
     Location newLocation = currentLocation;
     for(int i = 0; i < LOCATIONS.size(); i ++) {
         Location location = LOCATIONS[i];
-        int locationXPosition = location.getXPosition();
-        int locationYPosition = location.getYPosition();
         
-        if (locationXPosition == currentXPosition && locationYPosition == currentYPosition) {
-            continue;
-        }else if (locationXPosition == newXPosition && locationYPosition == newYPosition) {
+        if (location.isAt(newXPosition, newYPosition)) {
             newLocation = location;
             break;
         }
     }
     
-    player.moveTo(newLocation);
+    if (newLocation == currentLocation) {
+        cout << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
+    } else {
+        player.moveTo(newLocation);
+        cout << player.getName() + " moves " + dir.getName() + " to " + player.getLocationName() << endl;
+    }
 }

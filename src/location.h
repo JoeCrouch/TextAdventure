@@ -17,6 +17,8 @@ public:
     string getName();
     int getXPosition();
     int getYPosition();
+    bool operator == (const Location& location);
+    bool isAt(int x, int y);
     
 private:
     Location() {};
