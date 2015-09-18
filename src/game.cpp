@@ -4,11 +4,15 @@
 #include <stdlib.h>
 #include "game.h"
 #include "direction.h"
+#include "stringManager.h"
+#include "actionService.h"
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 using std::getline;
+
+ActionService* getAction(string actionString, Player player);
 
 Game::Game(Player player) : player(player) {
 }
@@ -18,17 +22,9 @@ void Game::play() {
     
     bool exitedGame = false;
     while (!exitedGame) {
-        cout << "Which direction would you like to move (invalid direction will exit game) ?" << endl;
-        string input = string("");
-        getline(cin, input);
         
-        const Direction* direction = Direction::getDirection(input);
-        
-        if (direction == NULL) {
-            exitedGame = true;
-        } else {
-            movePlayer(*direction);
-        }
+        ActionService* actionService = ActionService::getActionFromPlayer(player.getAvailableActions());
+        exitedGame = actionService->execute(&player);
     }
     
 }

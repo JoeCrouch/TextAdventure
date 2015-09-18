@@ -1,13 +1,25 @@
-//
-//  action.h
-//  TextAdventureXCode
-//
-//  Created by Joseph Crouch on 18/09/2015.
-//  Copyright (c) 2015 Joseph Crouch. All rights reserved.
-//
+#ifndef TextAdventure_action_h
+#define TextAdventure_action_h
 
-#ifndef TextAdventureXCode_action_h
-#define TextAdventureXCode_action_h
+#include <string>
+using std::string;
+
+class Action {
+    
+public:
+    static const Action MOVE;
+    static const Action QUIT;
+    
+    string getName();
+    bool operator < (const Action& action) const;
+    
+private:
+    Action() {};
+    
+    Action(string name);
+    
+    string name_;
+};
 
 
 

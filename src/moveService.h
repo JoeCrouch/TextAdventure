@@ -1,14 +1,14 @@
-//
-//  moveService.h
-//  TextAdventureXCode
-//
-//  Created by Joseph Crouch on 18/09/2015.
-//  Copyright (c) 2015 Joseph Crouch. All rights reserved.
-//
 
-#ifndef TextAdventureXCode_moveService_h
-#define TextAdventureXCode_moveService_h
+#ifndef TextAdventure_moveService_h
+#define TextAdventure_moveService_h
 
+class Player;
 
+#include "actionService.h"
+
+class MoveService: public ActionService {
+public:
+    bool execute(Player* player);
+};
 
 #endif

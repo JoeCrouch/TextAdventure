@@ -15,8 +15,8 @@ public:
     
     static const Direction* getDirection(string direction);
     
-    int getXDirection();
-    int getYDirection();
+    int getXDirection() const;
+    int getYDirection() const;
     string getName() const;
     
 private:

@@ -1,9 +1,39 @@
-//
-//  actionService.cpp
-//  TextAdventureXCode
-//
-//  Created by Joseph Crouch on 18/09/2015.
-//  Copyright (c) 2015 Joseph Crouch. All rights reserved.
-//
 
 #include "actionService.h"
+#include "moveService.h"
+#include "quitService.h"
+#include "stringManager.h"
+#include <map>
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+using std::map;
+
+map<const Action, ActionService*> actionServiceMap();
+
+ActionService* ActionService::getActionFromPlayer(vector<Action> availableActions) {
+    cout << "What would you like to do?" << endl;
+    string input = string("");
+    getline(cin, input);
+    
+    //TODO: deal with invalid action better (Suggest player prints available actions)
+    for (int i =0; i < availableActions.size(); i++) {
+        Action action = availableActions[i];
+        
+        if (StringManager::equalIgnoreCase(input, action.getName())) {
+            return actionServiceMap()[action];
+        }
+    }
+    
+    return NULL;
+}
+
+map<const Action, ActionService*> actionServiceMap() {
+    map<const Action, ActionService*> actionServiceMap;
+    
+    actionServiceMap[Action::QUIT] = new QuitService();
+    actionServiceMap[Action::MOVE] = new MoveService();
+    
+    return actionServiceMap;
+};

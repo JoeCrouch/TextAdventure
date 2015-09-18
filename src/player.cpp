@@ -4,7 +4,10 @@
 using std::cout;
 using std::endl;
 
-Player::Player(string name, Location location) : name_(name), location_(location) {
+Player::Player(string name, Location location) :
+    name_(name),
+    location_(location),
+    availableActions_(vector<Action> {Action::MOVE, Action::QUIT}) {
 }
 
 void Player::printPlayerCharacteristics() {
@@ -25,4 +28,8 @@ void Player::moveTo(Location location) {
 
 string Player::getLocationName() {
     return location_.getName();
+}
+
+vector<Action> Player::getAvailableActions() {
+    return availableActions_;
 }

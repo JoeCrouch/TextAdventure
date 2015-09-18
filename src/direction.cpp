@@ -25,11 +25,11 @@ const Direction* Direction::getDirection(string direction) {
     return NULL;
 }
 
-int Direction::getXDirection() {
+int Direction::getXDirection() const {
     return xDirection_;
 }
 
-int Direction::getYDirection() {
+int Direction::getYDirection() const {
     return yDirection_;
 }
 

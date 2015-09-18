@@ -1,9 +1,16 @@
-//
-//  action.cpp
-//  TextAdventureXCode
-//
-//  Created by Joseph Crouch on 18/09/2015.
-//  Copyright (c) 2015 Joseph Crouch. All rights reserved.
-//
 
 #include "action.h"
+
+const Action Action::MOVE = Action("Move");
+const Action Action::QUIT = Action("Quit");
+
+Action::Action(string name) : name_(name) {
+}
+
+string Action::getName() {
+    return name_;
+}
+
+bool Action::operator < (const Action& action) const {
+    return name_ < action.name_;
+}

@@ -6,7 +6,6 @@ class Location;
 class Direction;
 
 #include "player.h"
-
 #include <vector>
 using std::vector;
 
@@ -16,11 +15,11 @@ class Game {
 public:
     Game(Player player);
     void play();
+    static const vector<Location> LOCATIONS;
     
 private:
     Game();
     
-    static const vector<Location> LOCATIONS;
     void movePlayer(Direction dir);
 };
 
