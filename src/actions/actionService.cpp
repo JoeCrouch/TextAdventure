@@ -2,6 +2,7 @@
 #include "actionService.h"
 #include "moveService.h"
 #include "quitService.h"
+#include "invalidActionService.h"
 #include "stringManager.h"
 #include <map>
 #include <iostream>
@@ -18,7 +19,7 @@ ActionService* ActionService::getActionFromPlayer(vector<Action> availableAction
     getline(cin, input);
     
     //TODO: deal with invalid action better (Suggest player prints available actions)
-    for (int i =0; i < availableActions.size(); i++) {
+    for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
         
         if (StringManager::equalIgnoreCase(input, action.getName())) {
@@ -26,7 +27,7 @@ ActionService* ActionService::getActionFromPlayer(vector<Action> availableAction
         }
     }
     
-    return NULL;
+    return new InvalidActionService(input);
 }
 
 map<const Action, ActionService*> actionServiceMap() {

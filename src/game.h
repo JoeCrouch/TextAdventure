@@ -19,8 +19,6 @@ public:
     
 private:
     Game();
-    
-    void movePlayer(Direction dir);
 };
 
 #endif

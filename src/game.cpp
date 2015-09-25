@@ -36,27 +36,3 @@ const vector<Location> Game::LOCATIONS {
     Location::MOUNTAIN,
     Location::DESERT
 };
-
-void Game::movePlayer(Direction dir) {
-    Location currentLocation = player.getLocation();
-    
-    int newXPosition = currentLocation.getXPosition() + dir.getXDirection();
-    int newYPosition = currentLocation.getYPosition() + dir.getYDirection();
-    
-    Location newLocation = currentLocation;
-    for(int i = 0; i < LOCATIONS.size(); i ++) {
-        Location location = LOCATIONS[i];
-        
-        if (location.isAt(newXPosition, newYPosition)) {
-            newLocation = location;
-            break;
-        }
-    }
-    
-    if (newLocation == currentLocation) {
-        cout << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
-    } else {
-        player.moveTo(newLocation);
-        cout << player.getName() + " moves " + dir.getName() + " to " + player.getLocationName() << endl;
-    }
-}
