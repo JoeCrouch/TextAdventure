@@ -1,6 +1,7 @@
 
 #include "actionService.h"
 #include "moveService.h"
+#include "printActionsService.h"
 #include "quitService.h"
 #include "invalidActionService.h"
 #include "stringManager.h"
@@ -18,7 +19,6 @@ ActionService* ActionService::getActionFromPlayer(vector<Action> availableAction
     string input = string("");
     getline(cin, input);
     
-    //TODO: deal with invalid action better (Suggest player prints available actions)
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
         
@@ -34,6 +34,7 @@ map<const Action, ActionService*> actionServiceMap() {
     map<const Action, ActionService*> actionServiceMap;
     
     actionServiceMap[Action::QUIT] = new QuitService();
+    actionServiceMap[Action::PRINT_ACTIONS] = new PrintActionsService();
     actionServiceMap[Action::MOVE] = new MoveService();
     
     return actionServiceMap;

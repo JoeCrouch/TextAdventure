@@ -2,6 +2,7 @@
 #include "action.h"
 
 const Action Action::MOVE = Action("Move");
+const Action Action::PRINT_ACTIONS = Action("Print Actions");
 const Action Action::QUIT = Action("Quit");
 
 Action::Action(string name) : name_(name) {

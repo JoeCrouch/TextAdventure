@@ -13,7 +13,6 @@ bool MoveService::execute(Player* player) {
     string input = string("");
     getline(cin, input);
     
-    //TODO: deal better with invalid input;
     const Direction dir = Direction::getDirection(input);
     
     Location currentLocation = player->getLocation();
