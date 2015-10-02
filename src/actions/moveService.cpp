@@ -1,17 +1,18 @@
 
 #include "moveService.h"
 #include "game.h"
-#include "player.h"
 #include "direction.h"
 #include <iostream>
 using std::cout;
 using std::cin;
 using std::endl;
 
-MoveService::MoveService(string direction) : direction_(direction) {
+MoveService::MoveService(string direction, Player player) :
+        direction_(direction),
+        player_(player){
 }
 
-bool MoveService::execute(Player* player) {
+bool MoveService::execute() {
     string dirString = direction_;
     
     if (direction_.length() == 0) {
@@ -20,7 +21,7 @@ bool MoveService::execute(Player* player) {
     }
     const Direction dir = Direction::getDirection(dirString);
     
-    Location currentLocation = player->getLocation();
+    Location currentLocation = player_.getLocation();
     
     int newXPosition = currentLocation.getXPosition() + dir.getXDirection();
     int newYPosition = currentLocation.getYPosition() + dir.getYDirection();
@@ -45,8 +46,8 @@ bool MoveService::execute(Player* player) {
     } else if (newLocation == currentLocation) {
         cout << endl << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
     } else {
-        player->moveTo(newLocation);
-        cout << endl << player->getName() + " moves " + dir.getName() + " to " + player->getLocationName() << endl;
+        player_.moveTo(newLocation);
+        cout << endl << player_.getName() + " moves " + dir.getName() + " to " + player_.getLocationName() << endl;
     }
     
     return false;

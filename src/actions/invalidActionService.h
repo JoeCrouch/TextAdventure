@@ -11,7 +11,7 @@ using std::string;
 
 class InvalidActionService: public ActionService {
 public:
-    bool execute(Player* player);
+    bool execute();
     InvalidActionService(string input);
     
 private:

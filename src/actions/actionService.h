@@ -11,11 +11,10 @@ class ActionService {
 public:
     virtual ~ActionService() {};
     
-    // TODO: rather than pass player in here pass into the services that require it.
     // Return true if game should be exited and false otherwise
-    virtual bool execute(Player* player) = 0;
+    virtual bool execute() = 0;
     
-    static ActionService* getActionFromPlayer(vector<Action> availableActions);
+    static ActionService* getActionFromPlayer(Player player);
 };
 
 #endif

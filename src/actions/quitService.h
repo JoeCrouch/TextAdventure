@@ -8,7 +8,7 @@ class Player;
 
 class QuitService: public ActionService {
 public:
-    bool execute(Player* player);
+    bool execute();
 };
 
 #endif

@@ -7,7 +7,7 @@ using std::endl;
 InvalidActionService::InvalidActionService(string input) : invalidActionString_(input) {
 }
 
-bool InvalidActionService::execute(Player* player) {
+bool InvalidActionService::execute() {
     cout << endl << "'" + invalidActionString_ + "' is not a valid action. For a list of valid actions choose 'print actions'" << endl;
     return false;
 }

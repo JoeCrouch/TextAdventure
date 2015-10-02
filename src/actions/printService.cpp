@@ -21,10 +21,12 @@ void printActions();
 
 bool canBePrinted(string printTarget);
 
-PrintService::PrintService(string printTarget) : printTarget_(printTarget) {
+PrintService::PrintService(string printTarget, vector<Action> availableActions) :
+        printTarget_(printTarget),
+        availableActions_(availableActions) {
 }
 
-bool PrintService::execute(Player* player) {
+bool PrintService::execute() {
     string printTarget = printTarget_;
     
     if (printTarget.length() == 0) {
@@ -32,8 +34,7 @@ bool PrintService::execute(Player* player) {
         getline(cin, printTarget);
     }
     
-    availableActions = player->getAvailableActions();
-    
+    availableActions = availableActions_;
     string printTargetUpperCase = StringManager::toUpperCase(printTarget);
     if (canBePrinted(printTargetUpperCase)) {
         pfunc function = printFunctionsMap[printTargetUpperCase];
@@ -53,6 +54,8 @@ bool canBePrinted(string printTarget) {
     return it != printFunctionsMap.end();
 };
 
+
+// TODO: Should be able to print map, and player location.
 map<string, pfunc> buildPrintFunctionsMap() {
     static map<string, pfunc> printFunctionsMap;
     
