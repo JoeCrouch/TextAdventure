@@ -7,7 +7,7 @@ using std::endl;
 Player::Player(string name, Location location) :
     name_(name),
     location_(location),
-    availableActions_(vector<Action> {Action::MOVE, Action::PRINT_ACTIONS, Action::QUIT}) {
+    availableActions_(vector<Action> {Action::MOVE, Action::PRINT, Action::QUIT}) {
 }
 
 void Player::printPlayerCharacteristics() {

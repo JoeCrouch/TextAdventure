@@ -8,12 +8,17 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+MoveService::MoveService(string direction) : direction_(direction) {
+}
+
 bool MoveService::execute(Player* player) {
-    cout << "Which direction would you like to move?" << endl;
-    string input = string("");
-    getline(cin, input);
+    string dirString = direction_;
     
-    const Direction dir = Direction::getDirection(input);
+    if (direction_.length() == 0) {
+        cout << "Which direction would you like to move?" << endl;
+        getline(cin, dirString);
+    }
+    const Direction dir = Direction::getDirection(dirString);
     
     Location currentLocation = player->getLocation();
     
@@ -32,7 +37,7 @@ bool MoveService::execute(Player* player) {
     
     
     if (dir == Direction::NOWHERE) {
-        cout << input + " is not a valid direction try one of: " << endl;
+        cout << dirString + " is not a valid direction try one of: " << endl;
         for (int i = 0; i < Direction::VALID_DIRECTIONS.size(); i++) {
             Direction direction = Direction::VALID_DIRECTIONS[i];
             cout << direction.getName() << endl;

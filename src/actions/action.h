@@ -8,7 +8,7 @@ class Action {
     
 public:
     static const Action MOVE;
-    static const Action PRINT_ACTIONS;
+    static const Action PRINT;
     static const Action QUIT;
     
     string getName();
