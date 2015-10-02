@@ -15,7 +15,7 @@ bool MoveService::execute(Player* player) {
     string dirString = direction_;
     
     if (direction_.length() == 0) {
-        cout << "Which direction would you like to move?" << endl;
+        cout << endl << "Which direction would you like to move?" << endl;
         getline(cin, dirString);
     }
     const Direction dir = Direction::getDirection(dirString);
@@ -37,16 +37,16 @@ bool MoveService::execute(Player* player) {
     
     
     if (dir == Direction::NOWHERE) {
-        cout << dirString + " is not a valid direction try one of: " << endl;
+        cout << endl << "'" + dirString + "' is not a valid direction try one of: " << endl;
         for (int i = 0; i < Direction::VALID_DIRECTIONS.size(); i++) {
             Direction direction = Direction::VALID_DIRECTIONS[i];
             cout << direction.getName() << endl;
         }
     } else if (newLocation == currentLocation) {
-        cout << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
+        cout << endl << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
     } else {
         player->moveTo(newLocation);
-        cout << player->getName() + " moves " + dir.getName() + " to " + player->getLocationName() << endl;
+        cout << endl << player->getName() + " moves " + dir.getName() + " to " + player->getLocationName() << endl;
     }
     
     return false;

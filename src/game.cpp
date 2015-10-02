@@ -18,7 +18,7 @@ Game::Game(Player player) : player(player) {
 }
 
 void Game::play() {
-    cout << player.getName() + " wakes up at " + player.getLocationName() << endl;
+    cout << endl << player.getName() + " wakes up at " + player.getLocationName() << endl;
     
     bool exitedGame = false;
     while (!exitedGame) {

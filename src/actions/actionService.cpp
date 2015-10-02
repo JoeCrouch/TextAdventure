@@ -15,7 +15,7 @@ using std::map;
 map<const Action, ActionService*> actionServiceMap(string actionTarget);
 
 ActionService* ActionService::getActionFromPlayer(vector<Action> availableActions) {
-    cout << "What would you like to do?" << endl;
+    cout << endl << "What would you like to do?" << endl;
     string input = string("");
     getline(cin, input);
     

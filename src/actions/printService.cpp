@@ -28,7 +28,7 @@ bool PrintService::execute(Player* player) {
     string printTarget = printTarget_;
     
     if (printTarget.length() == 0) {
-        cout << "What would you like to print?" << endl;
+        cout << endl << "What would you like to print?" << endl;
         getline(cin, printTarget);
     }
     
@@ -39,7 +39,7 @@ bool PrintService::execute(Player* player) {
         pfunc function = printFunctionsMap[printTargetUpperCase];
         function();
     } else {
-        cout << printTarget + " is not printable. Try one of:" << endl;
+        cout << endl << "'" + printTarget + "' is not printable. Try one of:" << endl;
         for (map<string, pfunc>::iterator it = printFunctionsMap.begin(); it != printFunctionsMap.end(); ++it) {
             cout << it->first << endl;
         }
@@ -63,7 +63,7 @@ map<string, pfunc> buildPrintFunctionsMap() {
 };
 
 void printActions() {
-    cout << "Available actions are:" << endl;
+    cout << endl << "Available actions are:" << endl;
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
         cout << action.getName() << endl;
