@@ -11,19 +11,18 @@ using std::endl;
 using std::vector;
 using std::map;
 
-vector<Action> availableActions;
-
-typedef void (*pfunc)();
+typedef void (*pfunc)(Player player);
 
 map<string, pfunc> buildPrintFunctionsMap();
 map<string, pfunc> printFunctionsMap = buildPrintFunctionsMap();
-void printActions();
+void printActions(Player player);
+void printLocation(Player player);
 
 bool canBePrinted(string printTarget);
 
-PrintService::PrintService(string printTarget, vector<Action> availableActions) :
+PrintService::PrintService(string printTarget, Player player) :
         printTarget_(printTarget),
-        availableActions_(availableActions) {
+        player_(player) {
 }
 
 bool PrintService::execute() {
@@ -34,11 +33,10 @@ bool PrintService::execute() {
         getline(cin, printTarget);
     }
     
-    availableActions = availableActions_;
     string printTargetUpperCase = StringManager::toUpperCase(printTarget);
     if (canBePrinted(printTargetUpperCase)) {
         pfunc function = printFunctionsMap[printTargetUpperCase];
-        function();
+        function(player_);
     } else {
         cout << endl << "'" + printTarget + "' is not printable. Try one of:" << endl;
         for (map<string, pfunc>::iterator it = printFunctionsMap.begin(); it != printFunctionsMap.end(); ++it) {
@@ -61,16 +59,22 @@ map<string, pfunc> buildPrintFunctionsMap() {
     
     if (printFunctionsMap.size() == 0) {
         printFunctionsMap["ACTIONS"] = &printActions;
+        printFunctionsMap["LOCATION"] = &printLocation;
     }
     return printFunctionsMap;
 };
 
-void printActions() {
+void printActions(Player player) {
+    vector<Action> availableActions = player.getAvailableActions();
     cout << endl << "Available actions are:" << endl;
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
         cout << action.getName() << endl;
     }
+}
+
+void printLocation(Player player) {
+    cout << endl << player.getName() + " is at " + player.getLocationName() << endl;
 }
 
 

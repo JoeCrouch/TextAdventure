@@ -43,7 +43,7 @@ map<const Action, ActionService*> actionServiceMap(string actionTarget, Player p
     map<const Action, ActionService*> actionServiceMap;
     
     actionServiceMap[Action::QUIT] = new QuitService();
-    actionServiceMap[Action::PRINT] = new PrintService(actionTarget, player.getAvailableActions());
+    actionServiceMap[Action::PRINT] = new PrintService(actionTarget, player);
     actionServiceMap[Action::MOVE] = new MoveService(actionTarget, player);
     
     return actionServiceMap;
