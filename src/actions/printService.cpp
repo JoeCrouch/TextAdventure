@@ -2,6 +2,8 @@
 #include "printService.h"
 #include "player.h"
 #include "stringManager.h"
+#include "game.h"
+#include <algorithm>
 #include <vector>
 #include <map>
 #include <iostream>
@@ -10,6 +12,8 @@ using std::cin;
 using std::endl;
 using std::vector;
 using std::map;
+using std::max;
+using std::sort;
 
 typedef void (*pfunc)(Player player);
 
@@ -17,8 +21,14 @@ map<string, pfunc> buildPrintFunctionsMap();
 map<string, pfunc> printFunctionsMap = buildPrintFunctionsMap();
 void printActions(Player player);
 void printLocation(Player player);
+void printMap(Player player);
 
 bool canBePrinted(string printTarget);
+
+int getMaxXCoord();
+int getMaxYCoord();
+
+vector<Location> orderLocations();
 
 PrintService::PrintService(string printTarget, Player player) :
         printTarget_(printTarget),
@@ -60,6 +70,7 @@ map<string, pfunc> buildPrintFunctionsMap() {
     if (printFunctionsMap.size() == 0) {
         printFunctionsMap["ACTIONS"] = &printActions;
         printFunctionsMap["LOCATION"] = &printLocation;
+        printFunctionsMap["MAP"] = &printMap;
     }
     return printFunctionsMap;
 };
@@ -77,4 +88,47 @@ void printLocation(Player player) {
     cout << endl << player.getName() + " is at " + player.getLocationName() << endl;
 }
 
+void printMap(Player player) {
+    int maxX = getMaxXCoord();
+    int maxY = getMaxYCoord();
+    
+    cout << endl << "STUFF" << endl;
+    
+    vector<Location> orderedLocations = Game::LOCATIONS;
+    sort(orderedLocations.begin(), orderedLocations.end());
+ 
+    // TODO: clean up how print map - get max locationName length the print accordingly using StringManager
+    vector<Location>::iterator iterator = orderedLocations.begin();
+    for (int y = 0; y < maxY; y++) {
+        for (int x = 0; x < maxX; x++) {
+            if ((*iterator).isAt(x, y)) {
+                cout << (*iterator).getName();
+                iterator++;
+            } else {
+                cout << "---------";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int getMaxXCoord() {
+    int maxLocationX = 0;
+    for (int i = 0; i < Game::LOCATIONS.size(); i++) {
+        Location location = Game::LOCATIONS[i];
+        maxLocationX = max(maxLocationX, location.getXPosition());
+    }
+    
+    return maxLocationX + 1;
+}
+
+int getMaxYCoord() {
+    int maxLocationY = 0;
+    for (int i = 0; i < Game::LOCATIONS.size(); i++) {
+        Location location = Game::LOCATIONS[i];
+        maxLocationY = max(maxLocationY, location.getYPosition());
+    }
+    
+    return maxLocationY + 1;
+}
 

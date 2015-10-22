@@ -7,7 +7,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-MoveService::MoveService(string direction, Player player) :
+MoveService::MoveService(string direction, Player* player) :
         direction_(direction),
         player_(player){
 }
@@ -21,7 +21,7 @@ bool MoveService::execute() {
     }
     const Direction dir = Direction::getDirection(dirString);
     
-    Location currentLocation = player_.getLocation();
+    Location currentLocation = player_->getLocation();
     
     int newXPosition = currentLocation.getXPosition() + dir.getXDirection();
     int newYPosition = currentLocation.getYPosition() + dir.getYDirection();
@@ -46,8 +46,8 @@ bool MoveService::execute() {
     } else if (newLocation == currentLocation) {
         cout << endl << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
     } else {
-        player_.moveTo(newLocation);
-        cout << endl << player_.getName() + " moves " + dir.getName() + " to " + player_.getLocationName() << endl;
+        player_->moveTo(newLocation);
+        cout << endl << player_->getName() + " moves " + dir.getName() + " to " + player_->getLocationName() << endl;
     }
     
     return false;

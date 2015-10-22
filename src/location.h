@@ -18,6 +18,7 @@ public:
     int getXPosition();
     int getYPosition();
     bool operator == (const Location& location);
+    bool operator < (const Location& location) const;
     bool isAt(int x, int y);
     
 private:

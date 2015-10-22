@@ -9,14 +9,14 @@ using std::string;
 
 class MoveService: public ActionService {
 public:
-    MoveService(string direction, Player player);
+    MoveService(string direction, Player* player);
     bool execute();
     
 private:
     MoveService();
     
     string direction_;
-    Player player_;
+    Player* player_;
 };
 
 #endif

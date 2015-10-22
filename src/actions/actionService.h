@@ -14,7 +14,7 @@ public:
     // Return true if game should be exited and false otherwise
     virtual bool execute() = 0;
     
-    static ActionService* getActionFromPlayer(Player player);
+    static ActionService* getActionFromPlayer(Player* player);
 };
 
 #endif

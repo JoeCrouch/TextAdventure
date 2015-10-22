@@ -23,7 +23,7 @@ void Game::play() {
     bool exitedGame = false;
     while (!exitedGame) {
         
-        ActionService* actionService = ActionService::getActionFromPlayer(player);
+        ActionService* actionService = ActionService::getActionFromPlayer(&player);
         exitedGame = actionService->execute();
     }
     
