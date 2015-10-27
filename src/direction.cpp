@@ -5,10 +5,10 @@
 using std::cout;
 using std::endl;
 
-const Direction Direction::NORTH = Direction(1, 0, "north");
-const Direction Direction::SOUTH = Direction(-1, 0, "south");
-const Direction Direction::EAST = Direction(0, 1, "east");
-const Direction Direction::WEST = Direction(0, -1, "west");
+const Direction Direction::NORTH = Direction(0, 1, "north");
+const Direction Direction::SOUTH = Direction(0, -1, "south");
+const Direction Direction::EAST = Direction(1, 0, "east");
+const Direction Direction::WEST = Direction(-1, 0, "west");
 const Direction Direction::NOWHERE = Direction(0, 0, "nowhere");
 
 const vector<Direction> Direction::VALID_DIRECTIONS {

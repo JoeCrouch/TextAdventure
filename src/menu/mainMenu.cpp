@@ -16,7 +16,7 @@ MainMenu& MainMenu::instance() {
 void MainMenu::printTitle() {
     cout
     << StringManager::repeatedSymbol(MENU_WIDTH, "_") << endl
-    << centerLine(MENU_WIDTH, "Text Adventure", "|") << endl
+    << StringManager::centerLine(MENU_WIDTH, "Text Adventure", "|") << endl
     << StringManager::repeatedSymbol(MENU_WIDTH, "_") << endl << endl;
 }
 
@@ -24,17 +24,17 @@ void MainMenu::printMenuOptions() {
     
     cout
     << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl
-    << centerLine(MENU_WIDTH, "", "||") << endl;
+    << StringManager::centerLine(MENU_WIDTH, "", "||") << endl;
     
     for (int i = 0; i < MENU_OPTIONS.size(); i++) {
         MenuOption* option = MENU_OPTIONS[i];
         string optionName = option->name();
         
-        cout << centerLine(MENU_WIDTH, "-- " + optionName, "||") << endl;
+        cout << StringManager::centerLine(MENU_WIDTH, "-- " + optionName, "||") << endl;
     }
     
     cout
-    << centerLine(MENU_WIDTH, "", "||") << endl
+    << StringManager::centerLine(MENU_WIDTH, "", "||") << endl
     << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl;
 }
 
@@ -67,23 +67,6 @@ MenuOption* MainMenu::readOption() {
     return chosenOption;
 }
 
-string MainMenu::centerLine(int length, string centerText, string border) {
-    int centerTextLength = (int) centerText.size();
-    int borderLength = (int) border.size();
-    
-    int totalWhiteSpaceLength = length - centerTextLength - (2 * borderLength);
-    int firstWhiteSpaceLength = totalWhiteSpaceLength / 2;
-    int secondWhiteSpaceLength = firstWhiteSpaceLength + totalWhiteSpaceLength % 2;
-    string centerLine =
-    border +
-    StringManager::repeatedSymbol(firstWhiteSpaceLength, " ") +
-    centerText +
-    StringManager::repeatedSymbol(secondWhiteSpaceLength, " ") +
-    border;
-    
-    return centerLine;
-}
-
 void MainMenu::printRepeatInputMessage(int entryFailures) {
     switch (entryFailures) {
         case 0:
@@ -102,9 +85,9 @@ void MainMenu::printRepeatInputMessage(int entryFailures) {
             cout
             << "Congratulations you lose the game before even beginning" << endl
             << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl
-            << centerLine(MENU_WIDTH, "", "||") << endl
-            << centerLine(MENU_WIDTH, " GAME OVER", "||") << endl
-            << centerLine(MENU_WIDTH, "", "||") << endl
+            << StringManager::centerLine(MENU_WIDTH, "", "||") << endl
+            << StringManager::centerLine(MENU_WIDTH, " GAME OVER", "||") << endl
+            << StringManager::centerLine(MENU_WIDTH, "", "||") << endl
             << StringManager::repeatedSymbol(MENU_WIDTH, "=") << endl << endl;
             
             exit(EXIT_FAILURE);

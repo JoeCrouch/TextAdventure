@@ -27,6 +27,7 @@ bool canBePrinted(string printTarget);
 
 int getMaxXCoord();
 int getMaxYCoord();
+int getMaxLocationNameLength();
 
 vector<Location> orderLocations();
 
@@ -63,7 +64,6 @@ bool canBePrinted(string printTarget) {
 };
 
 
-// TODO: Should be able to print map, and player location.
 map<string, pfunc> buildPrintFunctionsMap() {
     static map<string, pfunc> printFunctionsMap;
     
@@ -91,21 +91,19 @@ void printLocation(Player player) {
 void printMap(Player player) {
     int maxX = getMaxXCoord();
     int maxY = getMaxYCoord();
-    
-    cout << endl << "STUFF" << endl;
+    int maxNameLength = getMaxLocationNameLength();
     
     vector<Location> orderedLocations = Game::LOCATIONS;
     sort(orderedLocations.begin(), orderedLocations.end());
  
-    // TODO: clean up how print map - get max locationName length the print accordingly using StringManager
     vector<Location>::iterator iterator = orderedLocations.begin();
-    for (int y = 0; y < maxY; y++) {
+    for (int y = maxY - 1; y >= 0; y--) {
         for (int x = 0; x < maxX; x++) {
             if ((*iterator).isAt(x, y)) {
-                cout << (*iterator).getName();
+                cout << " " + StringManager::centerLine(maxNameLength, (*iterator).getName(), "-") + " ";
                 iterator++;
             } else {
-                cout << "---------";
+                cout << " " + StringManager::repeatedSymbol(maxNameLength, "-") + " ";
             }
         }
         cout << endl;
@@ -130,5 +128,15 @@ int getMaxYCoord() {
     }
     
     return maxLocationY + 1;
+}
+
+int getMaxLocationNameLength() {
+    int maxLocationNameLength = 0;
+    for (int i = 0; i < Game::LOCATIONS.size(); i++) {
+        Location location = Game::LOCATIONS[i];
+        maxLocationNameLength = max(maxLocationNameLength, (int) location.getName().size());
+    }
+    
+    return maxLocationNameLength + 2;
 }
 

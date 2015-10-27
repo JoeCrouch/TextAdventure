@@ -32,9 +32,9 @@ bool Location::operator==(const Location& location) {
 }
 
 bool Location::operator<(const Location& location) const {
-    if (yPosition_ < location.yPosition_){
+    if (yPosition_ > location.yPosition_){
         return true;
-    } else if (yPosition_ > location.yPosition_) {
+    } else if (yPosition_ < location.yPosition_) {
         return false;
     } else {
         return xPosition_ < location.xPosition_;

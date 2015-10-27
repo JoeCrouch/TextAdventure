@@ -25,8 +25,7 @@ private:
 
     static const int MENU_WIDTH;
     static const vector<MenuOption*> MENU_OPTIONS;
-    
-    string centerLine(int length, string centerText, string border);
+
     void printRepeatInputMessage(int entryFailures);
 };
 

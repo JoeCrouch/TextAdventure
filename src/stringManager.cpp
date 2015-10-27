@@ -23,3 +23,20 @@ bool StringManager::equalIgnoreCase(string string1, string string2) {
     
     return string1Upper.compare(string2Upper) == 0;
 }
+
+string StringManager::centerLine(int length, string centerText, string border) {
+    int centerTextLength = (int) centerText.size();
+    int borderLength = (int) border.size();
+    
+    int totalWhiteSpaceLength = length - centerTextLength - (2 * borderLength);
+    int firstWhiteSpaceLength = totalWhiteSpaceLength / 2;
+    int secondWhiteSpaceLength = firstWhiteSpaceLength + totalWhiteSpaceLength % 2;
+    string centerLine =
+    border +
+    repeatedSymbol(firstWhiteSpaceLength, " ") +
+    centerText +
+    repeatedSymbol(secondWhiteSpaceLength, " ") +
+    border;
+    
+    return centerLine;
+}
