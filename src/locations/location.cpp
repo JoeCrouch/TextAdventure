@@ -1,13 +1,8 @@
 
 #include "location.h"
+#include "player.h"
 #include <stdexcept>
 using std::invalid_argument;
-
-const Location Location::HOME = Location(1, 1, "Home");
-const Location Location::WOODS = Location(2, 1, "Woods");
-const Location Location::SEA = Location(0, 1, "Sea");
-const Location Location::MOUNTAIN = Location(1, 2, "Mountain");
-const Location Location::DESERT = Location(1, 0, "Desert");
 
 Location::Location(int x, int y, string name) : xPosition_(x), yPosition_(y), name_(name) {
     if (x < 0 || y < 0) {

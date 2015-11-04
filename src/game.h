@@ -15,7 +15,7 @@ class Game {
 public:
     Game(Player player);
     void play();
-    static const vector<Location> LOCATIONS;
+    static const vector<Location*> LOCATIONS;
     
 private:
     Game();

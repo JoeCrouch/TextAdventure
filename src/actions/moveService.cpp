@@ -21,16 +21,16 @@ bool MoveService::execute() {
     }
     const Direction dir = Direction::getDirection(dirString);
     
-    Location currentLocation = player_->getLocation();
+    Location* currentLocation = player_->getLocation();
     
-    int newXPosition = currentLocation.getXPosition() + dir.getXDirection();
-    int newYPosition = currentLocation.getYPosition() + dir.getYDirection();
+    int newXPosition = currentLocation->getXPosition() + dir.getXDirection();
+    int newYPosition = currentLocation->getYPosition() + dir.getYDirection();
     
-    Location newLocation = currentLocation;
+    Location* newLocation = currentLocation;
     for(int i = 0; i < Game::LOCATIONS.size(); i ++) {
-        Location location = Game::LOCATIONS[i];
+        Location* location = Game::LOCATIONS[i];
         
-        if (location.isAt(newXPosition, newYPosition)) {
+        if (location->isAt(newXPosition, newYPosition)) {
             newLocation = location;
             break;
         }
@@ -47,7 +47,7 @@ bool MoveService::execute() {
         cout << endl << "Cannot move " + dir.getName()  + " try moving somewhere else!"<< endl;
     } else {
         player_->moveTo(newLocation);
-        cout << endl << player_->getName() + " moves " + dir.getName() + " to " + player_->getLocationName() << endl;
+        cout << endl << newLocation->getEntranceMessage(*player_) << endl;
     }
     
     return false;

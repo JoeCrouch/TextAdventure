@@ -29,7 +29,7 @@ int getMaxXCoord();
 int getMaxYCoord();
 int getMaxLocationNameLength();
 
-vector<Location> orderLocations();
+bool pointerCompare(Location* a, Location* b);
 
 PrintService::PrintService(string printTarget, Player player) :
         printTarget_(printTarget),
@@ -93,14 +93,14 @@ void printMap(Player player) {
     int maxY = getMaxYCoord();
     int maxNameLength = getMaxLocationNameLength();
     
-    vector<Location> orderedLocations = Game::LOCATIONS;
-    sort(orderedLocations.begin(), orderedLocations.end());
+    vector<Location*> orderedLocations = Game::LOCATIONS;
+    sort(orderedLocations.begin(), orderedLocations.end(), pointerCompare);
  
-    vector<Location>::iterator iterator = orderedLocations.begin();
+    vector<Location*>::iterator iterator = orderedLocations.begin();
     for (int y = maxY - 1; y >= 0; y--) {
         for (int x = 0; x < maxX; x++) {
-            if ((*iterator).isAt(x, y)) {
-                cout << " " + StringManager::centerLine(maxNameLength, (*iterator).getName(), "-") + " ";
+            if ((*iterator)->isAt(x, y)) {
+                cout << " " + StringManager::centerLine(maxNameLength, (*iterator)->getName(), "-") + " ";
                 iterator++;
             } else {
                 cout << " " + StringManager::repeatedSymbol(maxNameLength, "-") + " ";
@@ -113,8 +113,8 @@ void printMap(Player player) {
 int getMaxXCoord() {
     int maxLocationX = 0;
     for (int i = 0; i < Game::LOCATIONS.size(); i++) {
-        Location location = Game::LOCATIONS[i];
-        maxLocationX = max(maxLocationX, location.getXPosition());
+        Location* location = Game::LOCATIONS[i];
+        maxLocationX = max(maxLocationX, location->getXPosition());
     }
     
     return maxLocationX + 1;
@@ -123,8 +123,8 @@ int getMaxXCoord() {
 int getMaxYCoord() {
     int maxLocationY = 0;
     for (int i = 0; i < Game::LOCATIONS.size(); i++) {
-        Location location = Game::LOCATIONS[i];
-        maxLocationY = max(maxLocationY, location.getYPosition());
+        Location* location = Game::LOCATIONS[i];
+        maxLocationY = max(maxLocationY, location->getYPosition());
     }
     
     return maxLocationY + 1;
@@ -133,10 +133,14 @@ int getMaxYCoord() {
 int getMaxLocationNameLength() {
     int maxLocationNameLength = 0;
     for (int i = 0; i < Game::LOCATIONS.size(); i++) {
-        Location location = Game::LOCATIONS[i];
-        maxLocationNameLength = max(maxLocationNameLength, (int) location.getName().size());
+        Location* location = Game::LOCATIONS[i];
+        maxLocationNameLength = max(maxLocationNameLength, (int) location->getName().size());
     }
     
-    return maxLocationNameLength + 2;
+    return maxLocationNameLength + 4;
+}
+
+bool pointerCompare(Location* a, Location* b) {
+    return (*a < *b);
 }
 

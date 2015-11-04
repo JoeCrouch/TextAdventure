@@ -12,12 +12,12 @@ using std::vector;
 
 class Player {
 public:
-    Player(string name, Location location);
+    Player(string name, Location* location);
     
     void printPlayerCharacteristics();
     string getName();
-    Location getLocation();
-    void moveTo(Location location);
+    Location* getLocation();
+    void moveTo(Location* location);
     string getLocationName();
     vector<Action> getAvailableActions();
     
@@ -25,7 +25,7 @@ private:
     Player();
     
     string name_;
-    Location location_;
+    Location* location_;
     vector<Action> availableActions_;
 };
 

@@ -3,6 +3,11 @@
 #include <string>
 #include <stdlib.h>
 #include "game.h"
+#include "home.h"
+#include "sea.h"
+#include "desert.h"
+#include "woods.h"
+#include "mountain.h"
 #include "direction.h"
 #include "stringManager.h"
 #include "actionService.h"
@@ -29,10 +34,10 @@ void Game::play() {
     
 }
 
-const vector<Location> Game::LOCATIONS {
-    Location::HOME,
-    Location::WOODS,
-    Location::SEA,
-    Location::MOUNTAIN,
-    Location::DESERT
+const vector<Location*> Game::LOCATIONS {
+    new Home(),
+    new Woods(),
+    new Sea(),
+    new Mountain(),
+    new Desert()
 };
