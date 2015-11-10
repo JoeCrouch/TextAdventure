@@ -96,6 +96,7 @@ void printMap(Player player) {
     vector<Location*> orderedLocations = Game::LOCATIONS;
     sort(orderedLocations.begin(), orderedLocations.end(), pointerCompare);
  
+    //TODO if player is at location then surround with *** or make clear is here then can remove print location
     vector<Location*>::iterator iterator = orderedLocations.begin();
     for (int y = maxY - 1; y >= 0; y--) {
         for (int x = 0; x < maxX; x++) {

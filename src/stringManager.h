@@ -12,6 +12,7 @@ public:
     static string toUpperCase(string theString);
     static string repeatedSymbol(int length, string symbol);
     static bool equalIgnoreCase(string string1, string string2);
+    static bool startsWith(string string1, string string2);
     static string centerLine(int length, string centerText, string border);
     
 private:

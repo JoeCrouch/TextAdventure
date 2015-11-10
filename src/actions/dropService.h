@@ -1,14 +1,21 @@
-//
-//  dropService.h
-//  TextAdventureXCode
-//
-//  Created by Joseph Crouch on 09/11/2015.
-//  Copyright (c) 2015 Joseph Crouch. All rights reserved.
-//
 
-#ifndef TextAdventureXCode_dropService_h
-#define TextAdventureXCode_dropService_h
+#ifndef TextAdventure_dropService_h
+#define TextAdventure_dropService_h
 
+#include "actionService.h"
+#include <string>
+using std::string;
 
+class DropService: public ActionService {
+public:
+    DropService(string item, Player* player);
+    bool execute();
+    
+private:
+    DropService();
+    
+    string item_;
+    Player* player_;
+};
 
 #endif

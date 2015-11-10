@@ -24,6 +24,16 @@ bool StringManager::equalIgnoreCase(string string1, string string2) {
     return string1Upper.compare(string2Upper) == 0;
 }
 
+bool StringManager::startsWith(string string1, string string2) {
+    if (string1.size() >= string2.size()) {
+        string string1Start = toUpperCase(string1).substr(0, string2.size());
+        
+        return equalIgnoreCase(string1Start, string2);
+    } else {
+        return false;
+    }
+}
+
 string StringManager::centerLine(int length, string centerText, string border) {
     int centerTextLength = (int) centerText.size();
     int borderLength = (int) border.size();

@@ -2,6 +2,8 @@
 #include "actionService.h"
 #include "player.h"
 #include "moveService.h"
+#include "pickUpService.h"
+#include "dropService.h"
 #include "printService.h"
 #include "quitService.h"
 #include "invalidActionService.h"
@@ -20,23 +22,18 @@ ActionService* ActionService::getActionFromPlayer(Player* player) {
     string input = string("");
     getline(cin, input);
     
-    long firstWordLength = input.find(' ') == string::npos ? input.size() : input.find(' ') ;
-    
-    string firstWord = input.substr(0, firstWordLength);
-    string restOfInput = firstWordLength == input.length()
-                                        ? ""
-                                        : input.substr(firstWordLength + 1, input.length());
-    
     vector<Action> availableActions = player->getAvailableActions();
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
+        string actionName = action.getName();
         
-        if (StringManager::equalIgnoreCase(firstWord, action.getName())) {
+        if (StringManager::startsWith(input, actionName)) {
+            string restOfInput = input.size() > actionName.size() ? input.substr(actionName.size() + 1, input.size()) : "";
             return actionServiceMap(restOfInput, player)[action];
         }
     }
     
-    return new InvalidActionService(firstWord);
+    return new InvalidActionService(input);
 }
 
 map<const Action, ActionService*> actionServiceMap(string actionTarget, Player* player) {
@@ -44,6 +41,8 @@ map<const Action, ActionService*> actionServiceMap(string actionTarget, Player* 
     
     actionServiceMap[Action::QUIT] = new QuitService();
     actionServiceMap[Action::PRINT] = new PrintService(actionTarget, *player);
+    actionServiceMap[Action::DROP] = new DropService(actionTarget, player);
+    actionServiceMap[Action::PICK_UP] = new PickUpService(actionTarget, player);
     actionServiceMap[Action::MOVE] = new MoveService(actionTarget, player);
     
     return actionServiceMap;

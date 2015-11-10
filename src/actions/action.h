@@ -8,6 +8,8 @@ class Action {
     
 public:
     static const Action MOVE;
+    static const Action PICK_UP;
+    static const Action DROP;
     static const Action PRINT;
     static const Action QUIT;
     

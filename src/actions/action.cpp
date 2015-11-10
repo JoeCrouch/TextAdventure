@@ -2,6 +2,8 @@
 #include "action.h"
 
 const Action Action::MOVE = Action("Move");
+const Action Action::PICK_UP = Action("Pick Up");
+const Action Action::DROP = Action("Drop");
 const Action Action::PRINT = Action("Print");
 const Action Action::QUIT = Action("Quit");
 
