@@ -6,10 +6,11 @@ using std::endl;
 using std::remove;
 using std::find;
 
+const vector<Action> COMMON_ACTIONS = vector<Action> {Action::MOVE, Action::PICK_UP, Action::DROP, Action::PRINT, Action::QUIT};
+
 Player::Player(string name, Location* location) :
     name_(name),
     location_(location),
-availableActions_(vector<Action> {Action::MOVE, Action::PICK_UP, Action::DROP, Action::PRINT, Action::QUIT}),
     items_(vector<Item> {}){
 }
 
@@ -34,7 +35,7 @@ string Player::getLocationName() {
 }
 
 vector<Action> Player::getAvailableActions() {
-    return availableActions_;
+    return COMMON_ACTIONS;
 }
 
 vector<Item> Player::getItems() {

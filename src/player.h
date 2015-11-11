@@ -28,14 +28,11 @@ public:
 private:
     Player();
     
-    //TODO: Health, Age, etc. could impact game e.g. age has impact on number of moves before death or health etc.
+    //TODO: Health, Age, Tiredness, Hunger, Need to Poo etc. could impact game e.g. age has impact on number of moves before death or health etc.
     
     string name_;
     Location* location_;
     vector<Item> items_;
-    
-    //TODO: shouldn't be a field just determined by above method
-    vector<Action> availableActions_;
 };
 
 #endif

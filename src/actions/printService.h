@@ -9,14 +9,14 @@ using std::string;
 
 class PrintService: public ActionService {
 public:
-    PrintService(string printTarget, Player player);
+    PrintService(string printTarget, Player* player);
     bool execute();
     
 private:
     PrintService();
     
     string printTarget_;
-    Player player_;
+    Player* player_;
 };
 
 #endif

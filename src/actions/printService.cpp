@@ -15,13 +15,12 @@ using std::map;
 using std::max;
 using std::sort;
 
-typedef void (*pfunc)(Player player);
+typedef void (*pfunc)(Player* player);
 
 map<string, pfunc> buildPrintFunctionsMap();
 map<string, pfunc> printFunctionsMap = buildPrintFunctionsMap();
-void printActions(Player player);
-void printLocation(Player player);
-void printMap(Player player);
+void printActions(Player* player);
+void printMap(Player* player);
 
 bool canBePrinted(string printTarget);
 
@@ -31,7 +30,7 @@ int getMaxLocationNameLength();
 
 bool pointerCompare(Location* a, Location* b);
 
-PrintService::PrintService(string printTarget, Player player) :
+PrintService::PrintService(string printTarget, Player* player) :
         printTarget_(printTarget),
         player_(player) {
 }
@@ -64,19 +63,19 @@ bool canBePrinted(string printTarget) {
 };
 
 
+//TODO: remove map. Map should be used if the player has it.
 map<string, pfunc> buildPrintFunctionsMap() {
     static map<string, pfunc> printFunctionsMap;
     
     if (printFunctionsMap.size() == 0) {
         printFunctionsMap["ACTIONS"] = &printActions;
-        printFunctionsMap["LOCATION"] = &printLocation;
         printFunctionsMap["MAP"] = &printMap;
     }
     return printFunctionsMap;
 };
 
-void printActions(Player player) {
-    vector<Action> availableActions = player.getAvailableActions();
+void printActions(Player* player) {
+    vector<Action> availableActions = player->getAvailableActions();
     cout << endl << "Available actions are:" << endl;
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
@@ -84,24 +83,25 @@ void printActions(Player player) {
     }
 }
 
-void printLocation(Player player) {
-    cout << endl << player.getName() + " is at " + player.getLocationName() << endl;
-}
-
-void printMap(Player player) {
+void printMap(Player* player) {
     int maxX = getMaxXCoord();
     int maxY = getMaxYCoord();
     int maxNameLength = getMaxLocationNameLength();
     
+    Location* playersLocation = player->getLocation();
+    
     vector<Location*> orderedLocations = Game::LOCATIONS;
     sort(orderedLocations.begin(), orderedLocations.end(), pointerCompare);
  
-    //TODO if player is at location then surround with *** or make clear is here then can remove print location
     vector<Location*>::iterator iterator = orderedLocations.begin();
     for (int y = maxY - 1; y >= 0; y--) {
         for (int x = 0; x < maxX; x++) {
             if ((*iterator)->isAt(x, y)) {
-                cout << " " + StringManager::centerLine(maxNameLength, (*iterator)->getName(), "-") + " ";
+                if (*(*iterator) == *playersLocation) {
+                    cout << " " + StringManager::centerLine(maxNameLength, (*iterator)->getName(), "*") + " ";
+                } else {
+                    cout << " " + StringManager::centerLine(maxNameLength, (*iterator)->getName(), "-") + " ";
+                }
                 iterator++;
             } else {
                 cout << " " + StringManager::repeatedSymbol(maxNameLength, "-") + " ";
