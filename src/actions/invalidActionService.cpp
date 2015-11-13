@@ -8,6 +8,6 @@ InvalidActionService::InvalidActionService(string input) : invalidActionString_(
 }
 
 bool InvalidActionService::execute() {
-    cout << endl << "'" + invalidActionString_ + "' is not a valid action. For a list of valid actions choose 'print actions'" << endl;
+    cout << endl << "'" + invalidActionString_ + "' is not a valid action. For a list of valid actions choose 'view actions'" << endl;
     return false;
 }

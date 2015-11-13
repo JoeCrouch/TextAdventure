@@ -1,6 +1,6 @@
 
-#ifndef TextAdventureXCode_quitService_h
-#define TextAdventureXCode_quitService_h
+#ifndef TextAdventure_quitService_h
+#define TextAdventure_quitService_h
 
 class Player;
 

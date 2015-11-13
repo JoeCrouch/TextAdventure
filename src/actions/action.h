@@ -11,7 +11,7 @@ public:
     static const Action PICK_UP;
     static const Action DROP;
     static const Action USE;
-    static const Action PRINT;
+    static const Action VIEW;
     static const Action QUIT;
     
     string getName();

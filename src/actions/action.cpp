@@ -5,7 +5,7 @@ const Action Action::MOVE = Action("Move");
 const Action Action::PICK_UP = Action("Pick Up");
 const Action Action::DROP = Action("Drop");
 const Action Action::USE = Action("Use");
-const Action Action::PRINT = Action("Print");
+const Action Action::VIEW = Action("View");
 const Action Action::QUIT = Action("Quit");
 
 Action::Action(string name) : name_(name) {
