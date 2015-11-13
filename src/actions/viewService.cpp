@@ -2,8 +2,6 @@
 #include "viewService.h"
 #include "player.h"
 #include "stringManager.h"
-#include "game.h"
-#include <algorithm>
 #include <vector>
 #include <map>
 #include <iostream>
@@ -12,14 +10,14 @@ using std::cin;
 using std::endl;
 using std::vector;
 using std::map;
-using std::max;
-using std::sort;
 
 typedef void (*pfunc)(Player* player);
 
 map<string, pfunc> buildViewFunctionsMap();
 map<string, pfunc> viewFunctionsMap = buildViewFunctionsMap();
 void viewActions(Player* player);
+void viewLocationInfo(Player* player);
+void viewItems(Player* player);
 
 bool canBeViewed(string viewTarget);
 
@@ -61,6 +59,8 @@ map<string, pfunc> buildViewFunctionsMap() {
     
     if (viewFunctionsMap.size() == 0) {
         viewFunctionsMap["ACTIONS"] = &viewActions;
+        viewFunctionsMap["LOCATION INFO"] = &viewLocationInfo;
+        viewFunctionsMap["ITEMS"] = &viewItems;
     }
     return viewFunctionsMap;
 };
@@ -71,6 +71,34 @@ void viewActions(Player* player) {
     for (int i = 0; i < availableActions.size(); i++) {
         Action action = availableActions[i];
         cout << action.getName() << endl;
+    }
+}
+
+void viewLocationInfo(Player* player) {
+    Location* location = player->getLocation();
+    vector<Item const *> locationItems = location->getItems();
+    
+    if (locationItems.size() > 0) {
+        cout << endl << player->getName() + " looks around " + location->getName() + " and sees items: " << endl;
+        for (vector<Item const *>::iterator it = locationItems.begin(); it != locationItems.end(); ++it) {
+            cout << (*it)->getName() <<endl;
+        }
+    } else {
+        cout << "There are no items at " + location->getName() << endl;
+    }
+
+}
+
+void viewItems(Player* player) {
+    vector<Item const *> items = player->getItems();
+    
+    if (items.size() > 0) {
+        cout << endl << player->getName() + " looks in their bag and sees items: " << endl;
+        for (vector<Item const *>::iterator it = items.begin(); it != items.end(); ++it) {
+            cout << (*it)->getName() << endl;
+        }
+    } else {
+        cout << player->getName() + " has no items! :(" << endl;
     }
 }
 

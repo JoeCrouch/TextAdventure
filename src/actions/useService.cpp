@@ -24,8 +24,6 @@ bool UseService::execute() {
         
         
         if(find(availableItems.begin(), availableItems.end(), item) != availableItems.end()) {
-            player_->pickUpItem(item);
-            
             item->use(player_);
         }
         else {

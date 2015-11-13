@@ -36,11 +36,16 @@ bool DropService::execute() {
             
         }
         else {
-            //TODO: add ability to view items in location;
-            cout << endl << item_ + " is not available to drop" << endl;
+            if (availableItems.size() > 0) {
+                cout << endl << player_->getName() + " does not have a " + item_ + ". Try one of:" << endl;
+                for (vector<Item const *>::iterator it = availableItems.begin(); it != availableItems.end(); it++) {
+                    cout << (*it)->getName() << endl;
+                }
+            } else {
+                cout << endl << player_->getName() + " has no items to drop." << endl;
+            }
         }
     } else {
-        //TODO: add ability to view items in location;
         cout << endl << item_ + " is not a valid item" << endl;
     }
     

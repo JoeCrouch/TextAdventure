@@ -36,11 +36,16 @@ bool PickUpService::execute() {
             
         }
         else {
-            //TODO: add ability to view items in location;
-            cout << endl << item_ + " is not available to pick up." << endl;
+            if (availableItems.size() > 0) {
+                cout << endl << item_ + " is not available to pick up. The items at " + location->getName() + " are:" << endl;
+                for (vector<Item const *>::iterator it = availableItems.begin(); it != availableItems.end(); it++) {
+                    cout << (*it)->getName() << endl;
+                }
+            } else {
+                cout << endl << location->getName() + " has no items to pick up." << endl;
+            }
         }
     } else {
-        //TODO: add ability to view items in location;
         cout << endl << item_ + " is not a valid item" << endl;
     }
     
