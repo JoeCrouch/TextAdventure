@@ -2,6 +2,7 @@
 #include "home.h"
 #include "player.h"
 #include "item.h"
+#include "map.h"
 #include <vector>
 using std::to_string;
 using std::vector;
@@ -9,7 +10,7 @@ using std::vector;
 int visitNumber = 1;
 const string Home::NAME = "Home";
 
-Home::Home() : Location(1, 1, NAME, vector<Item> {Item::MAP}) {
+Home::Home() : Location(1, 1, NAME, vector<Item const *> {Map::INSTANCE}) {
     
 }
 

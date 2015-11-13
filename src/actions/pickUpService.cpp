@@ -21,18 +21,18 @@ bool PickUpService::execute() {
         getline(cin, item_);
     }
     if (Item::isValidItem(item_)) {
-        Item item = Item::getItem(item_);
+        Item const * item = Item::getItem(item_);
         
         Location* location = player_->getLocation();
         
-        vector<Item> availableItems = location->getItems();
+        vector<Item const *> availableItems = location->getItems();
         
         
         if(find(availableItems.begin(), availableItems.end(), item) != availableItems.end()) {
             player_->pickUpItem(item);
             location->removeItem(item);
             
-            cout << endl << player_->getName() + " picked up " + item.getName() << endl;
+            cout << endl << player_->getName() + " picked up " + item->getName() << endl;
             
         }
         else {
@@ -41,7 +41,7 @@ bool PickUpService::execute() {
         }
     } else {
         //TODO: add ability to view items in location;
-        cout << endl << item_ + " is a valid item" << endl;
+        cout << endl << item_ + " is not a valid item" << endl;
     }
     
     return false;

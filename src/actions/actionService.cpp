@@ -4,6 +4,7 @@
 #include "moveService.h"
 #include "pickUpService.h"
 #include "dropService.h"
+#include "useService.h"
 #include "printService.h"
 #include "quitService.h"
 #include "invalidActionService.h"
@@ -41,6 +42,7 @@ map<const Action, ActionService*> actionServiceMap(string actionTarget, Player* 
     
     actionServiceMap[Action::QUIT] = new QuitService();
     actionServiceMap[Action::PRINT] = new PrintService(actionTarget, player);
+    actionServiceMap[Action::USE] = new UseService(actionTarget, player);
     actionServiceMap[Action::DROP] = new DropService(actionTarget, player);
     actionServiceMap[Action::PICK_UP] = new PickUpService(actionTarget, player);
     actionServiceMap[Action::MOVE] = new MoveService(actionTarget, player);

@@ -21,9 +21,9 @@ public:
     void moveTo(Location* location);
     string getLocationName();
     vector<Action> getAvailableActions();
-    vector<Item> getItems();
-    void pickUpItem(Item item);
-    void dropItem(Item item);
+    vector<Item const *> getItems();
+    void pickUpItem(Item const * item);
+    void dropItem(Item const * item);
     
 private:
     Player();
@@ -32,7 +32,7 @@ private:
     
     string name_;
     Location* location_;
-    vector<Item> items_;
+    vector<Item const *> items_;
 };
 
 #endif

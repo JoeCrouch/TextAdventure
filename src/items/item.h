@@ -2,24 +2,27 @@
 #ifndef TextAdventure_item_h
 #define TextAdventure_item_h
 
+class Player;
+
 #include <string>
 using std::string;
 
 class Item {
 public:
-    static const Item MAP;
-    
-    string getName();
+    string getName() const;
     
     static bool isValidItem(string item);
-    static Item getItem(string itemName);
+    static const Item* getItem(string itemName);
     
     bool operator < (const Item& item) const;
     bool operator == (const Item& item) const;
     
+    virtual void use(Player* player) const = 0;
+    
+    Item(string name);
+    
 private:
     Item() {};
-    Item(string name);
     
     string name_;
 };
