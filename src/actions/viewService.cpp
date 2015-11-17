@@ -59,7 +59,7 @@ map<string, pfunc> buildViewFunctionsMap() {
     
     if (viewFunctionsMap.size() == 0) {
         viewFunctionsMap["ACTIONS"] = &viewActions;
-        viewFunctionsMap["LOCATION INFO"] = &viewLocationInfo;
+        viewFunctionsMap["LOCATION"] = &viewLocationInfo;
         viewFunctionsMap["ITEMS"] = &viewItems;
     }
     return viewFunctionsMap;
