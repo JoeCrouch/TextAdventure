@@ -6,6 +6,7 @@ const Action Action::PICK_UP = Action("Pick Up");
 const Action Action::DROP = Action("Drop");
 const Action Action::USE = Action("Use");
 const Action Action::VIEW = Action("View");
+const Action Action::TALK_TO = Action("Talk to");
 const Action Action::QUIT = Action("Quit");
 
 Action::Action(string name) : name_(name) {

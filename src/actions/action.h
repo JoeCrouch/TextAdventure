@@ -12,6 +12,7 @@ public:
     static const Action DROP;
     static const Action USE;
     static const Action VIEW;
+    static const Action TALK_TO;
     static const Action QUIT;
     
     string getName();

@@ -6,7 +6,7 @@ using std::endl;
 using std::remove;
 using std::find;
 
-const vector<Action> COMMON_ACTIONS = vector<Action> {Action::MOVE, Action::PICK_UP, Action::DROP, Action::USE, Action::VIEW, Action::QUIT};
+const vector<Action> COMMON_ACTIONS = vector<Action> {Action::MOVE, Action::PICK_UP, Action::DROP, Action::USE, Action::VIEW, Action::TALK_TO, Action::QUIT};
 
 Player::Player(string name, Location* location) :
     name_(name),

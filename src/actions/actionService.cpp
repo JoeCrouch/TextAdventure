@@ -6,6 +6,7 @@
 #include "dropService.h"
 #include "useService.h"
 #include "viewService.h"
+#include "talkToService.h"
 #include "quitService.h"
 #include "invalidActionService.h"
 #include "stringManager.h"
@@ -41,6 +42,7 @@ map<const Action, ActionService*> actionServiceMap(string actionTarget, Player* 
     map<const Action, ActionService*> actionServiceMap;
     
     actionServiceMap[Action::QUIT] = new QuitService();
+    actionServiceMap[Action::TALK_TO] = new TalkToService(actionTarget, player->getLocation());
     actionServiceMap[Action::VIEW] = new ViewService(actionTarget, player);
     actionServiceMap[Action::USE] = new UseService(actionTarget, player);
     actionServiceMap[Action::DROP] = new DropService(actionTarget, player);

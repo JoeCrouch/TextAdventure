@@ -3,6 +3,7 @@
 #include "player.h"
 #include "item.h"
 #include "map.h"
+#include "character.h"
 #include <vector>
 using std::to_string;
 using std::vector;
@@ -10,7 +11,7 @@ using std::vector;
 int visitNumber = 1;
 const string Home::NAME = "Home";
 
-Home::Home() : Location(1, 1, NAME, vector<Item const *> {Map::INSTANCE}) {
+Home::Home() : Location(1, 1, NAME, vector<Item const *> {Map::INSTANCE}, vector<Character> {Character("Neighbourhoods Friendly Spider")}) {
     
 }
 

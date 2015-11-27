@@ -86,6 +86,17 @@ void viewLocationInfo(Player* player) {
     } else {
         cout << "There are no items at " + location->getName() << endl;
     }
+    
+    vector<Character> locationCharacters = location->getCharacters();
+    
+    if (locationCharacters.size() > 0) {
+        cout << endl << player->getName() + " sees some characters: " << endl;
+        for (vector<Character>::iterator it = locationCharacters.begin(); it != locationCharacters.end(); ++it) {
+            cout << (*it).getName() <<endl;
+        }
+    } else {
+        cout << "There is no one here... " + player->getName() + " is all alone :(" << endl;
+    }
 
 }
 

@@ -2,10 +2,11 @@
 #include "sea.h"
 #include "stringManager.h"
 #include "player.h"
+#include "character.h"
 
 const string Sea::NAME = "Sea";
 
-Sea::Sea() : Location(0, 1, NAME) {
+Sea::Sea() : Location(0, 1, NAME, vector<Character> {Character("Steve The Sarcastic Somali Pirate"), Character("Someone Minding Thier Own Business")}) {
     
 }
 

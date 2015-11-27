@@ -4,11 +4,25 @@
 #include <stdexcept>
 using std::invalid_argument;
 
-Location::Location(int x, int y, string name) : Location(x, y, name, vector<Item const *>{}){
+Location::Location(int x, int y, string name) : Location(x, y, name, vector<Item const *>{}, vector<Character>{}){
     
 }
 
-Location::Location(int x, int y, string name, vector<Item const *> items) : xPosition_(x), yPosition_(y), name_(name), items_(items) {
+Location::Location(int x, int y, string name, vector<Character> characters) : Location(x, y, name, vector<Item const *>{}, characters){
+    
+}
+
+
+Location::Location(int x, int y, string name, vector<Item const *> items) : Location(x, y, name, items, vector<Character>{}){
+    
+}
+
+Location::Location(int x, int y, string name, vector<Item const *> items, vector<Character> characters) :
+    xPosition_(x),
+    yPosition_(y),
+    name_(name),
+    items_(items),
+    characters_(characters){
     if (x < 0 || y < 0) {
         throw invalid_argument("Can't have negative coordinate (Just coz)");
     }
@@ -28,6 +42,10 @@ int Location::getYPosition() {
 
 vector<Item const *> Location::getItems() {
     return items_;
+}
+
+vector<Character> Location::getCharacters() {
+    return characters_;
 }
 
 void Location::removeItem(Item const * item) {
