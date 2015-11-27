@@ -8,12 +8,21 @@ using std::string;
 class Character {
     
 public:
-    Character(string name);
+    static const Character NEIGHBOURHOODS_FRIENDLY_SPIDER;
+    static const Character STEVE_THE_SARCASTIC_SOMALI_PIRATE;
+    static const Character SOMEONE_MINDING_THEIR_OWN_BUSINESS;
+    
+    static bool isValid(string characterName);
+    static Character getCharacter(string characterName);
     
     string getName();
     
+    bool operator < (const Character& character) const;
+    bool operator == (const Character& character) const;
+    
 private:
     Character();
+    Character(string name);
     
     string name_;
 };

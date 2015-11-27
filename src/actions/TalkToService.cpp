@@ -10,12 +10,12 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-bool targetCanBeTalkedTo(string target, vector<Character> availableCharacters);
+bool targetCanBeTalkedTo(Character character, vector<Character> availableCharacters);
 string genericMessage();
 
-const map<string, string> theScript = {
-    {StringManager::toUpperCase("Steve The Sarcastic Somali Pirate"), "Blarrrr Blarrr Blarrr I'm a pirate!"},
-    {StringManager::toUpperCase("Neighbourhoods Friendly Spider"), "Blah Blah Blah I'm a spider"}
+const map<Character, string> theScript = {
+    {Character::STEVE_THE_SARCASTIC_SOMALI_PIRATE, "Blarrrr Blarrr Blarrr I'm a pirate!"},
+    {Character::NEIGHBOURHOODS_FRIENDLY_SPIDER, "Blah Blah Blah I'm a spider"}
 };
 
 TalkToService::TalkToService(string target, Location* location) : target_(target), location_(location) {
@@ -28,33 +28,32 @@ bool TalkToService::execute() {
         getline(cin, target_);
     }
     
-    vector<Character> availableCharacters = location_->getCharacters();
-    
-    if (targetCanBeTalkedTo(target_, availableCharacters)) {
-        map<string, string>::const_iterator pos = theScript.find(StringManager::toUpperCase(target_));
+    if (Character::isValid(target_)) {
         
-        if (pos == theScript.end()) {
-            cout << endl << target_ + ": " + genericMessage() << endl;
+        Character character = Character::getCharacter(target_);
+        vector<Character> availableCharacters = location_->getCharacters();
+        
+        if (targetCanBeTalkedTo(character, availableCharacters)) {
+            map<Character, string>::const_iterator pos = theScript.find(character);
+            
+            if (pos == theScript.end()) {
+                cout << endl << target_ + ": " + genericMessage() << endl;
+            } else {
+                string speech = pos->second;
+                cout << endl << target_ + ": " + speech << endl;
+            }
         } else {
-            string speech = pos->second;
-            cout << endl << target_ + ": " + speech << endl;
+            cout << target_ + " cannot be spoken to. Try using 'view location' to see characters available to speak to." << endl;
         }
     } else {
-        cout << target_ + " cannot be spoken to. Try using 'view location' to see characters available to speak to." << endl;
+        cout << endl << target_ + " is not a valid character" << endl;
     }
     
     return false;
 }
 
-bool targetCanBeTalkedTo(string target, vector<Character> availableCharacters) {
-    
-    for (vector<Character>::iterator it = availableCharacters.begin(); it != availableCharacters.end(); it++) {
-        if (StringManager::equalIgnoreCase(target, (*it).getName())) {
-            return true;
-        }
-    }
-    
-    return false;
+bool targetCanBeTalkedTo(Character character, vector<Character> availableCharacters) {
+    return find(availableCharacters.begin(), availableCharacters.end(), character) != availableCharacters.end();
 }
 
 string genericMessage() {

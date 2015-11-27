@@ -37,7 +37,7 @@ const Item* Item::getItem(string itemName) {
         }
     }
     
-    cout << endl << "ERROR: not valid item with name " + itemName;
+    cout << endl << "ERROR: not valid item with name " + itemName << endl;
     throw -1;
 }
 

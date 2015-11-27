@@ -11,7 +11,7 @@ using std::vector;
 int visitNumber = 1;
 const string Home::NAME = "Home";
 
-Home::Home() : Location(1, 1, NAME, vector<Item const *> {Map::INSTANCE}, vector<Character> {Character("Neighbourhoods Friendly Spider")}) {
+Home::Home() : Location(1, 1, NAME, vector<Item const *> {Map::INSTANCE}, vector<Character> {Character::NEIGHBOURHOODS_FRIENDLY_SPIDER}) {
     
 }
 

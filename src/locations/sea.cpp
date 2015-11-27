@@ -6,7 +6,7 @@
 
 const string Sea::NAME = "Sea";
 
-Sea::Sea() : Location(0, 1, NAME, vector<Character> {Character("Steve The Sarcastic Somali Pirate"), Character("Someone Minding Thier Own Business")}) {
+Sea::Sea() : Location(0, 1, NAME, vector<Character> {Character::STEVE_THE_SARCASTIC_SOMALI_PIRATE, Character::SOMEONE_MINDING_THEIR_OWN_BUSINESS}) {
     
 }
 
